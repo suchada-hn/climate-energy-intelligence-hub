@@ -1,0 +1,80 @@
+# Collections - named groupings of related entries
+
+- id: pypsa-earth-ecosystem
+  name: PyPSA-Earth Ecosystem
+  description: >-
+    Complete collection of PyPSA-Meets-Earth organization repos including
+    core models, data pipelines, demand tools, detection ML, and validation.
+  members:
+    - pypsa-earth
+    - pypsa-earth-sec
+    - pypsa-distribution
+    - earth-osm
+    - pydemand
+    - demand-creator
+    - detect-energy
+    - atlite
+    - pypsa-kz-data
+    - pypsa-zm-data
+
+- id: power-system-tools
+  name: Power System Modeling Tools
+  description: >-
+    Comprehensive collection of 150+ energy system models and tools
+    from energy-tools.csv.
+  members:
+    - pypsa
+    - pypsa-earth
+    - pandapower
+    - grid2op
+    - calliope
+    # Additional members populated by ETL
+
+- id: climate-foundation-models
+  name: Climate & Weather Foundation Models
+  description: >-
+    Foundation models for weather forecasting, climate projection,
+    downscaling and related ML tasks.
+  members:
+    - climax
+    - graphcast
+    - pangu-weather
+    - aurora
+    - fourcastnet
+    # Additional members populated by ETL
+
+- id: grid-datasets-global
+  name: Global Grid & Resource Datasets
+  description: >-
+    Worldwide datasets for grid topology, power plants, renewable
+    resources, and energy demand.
+  members:
+    - global-power-plant-database
+    - owid-energy-data
+    - globalenergygis
+    - gridfinder
+
+- id: demand-tools
+  name: Demand Forecasting & Generation Tools
+  description: >-
+    Tools for creating and forecasting electricity demand time series.
+  members:
+    - pydemand
+    - demand-creator
+
+- id: rl-environments
+  name: RL Environments for Grid Operations
+  description: >-
+    Reinforcement learning environments for training agents on power
+    grid control and operations.
+  members:
+    - grid2op
+    # pypownet, SustainGym, energy-py will be added
+
+- id: microgrid-tools
+  name: Microgrid & DER Tools
+  description: >-
+    Tools for modeling and optimizing microgrids and distributed
+    energy resources.
+  members:
+    # python-microgrid, MicroGridsPy, OpenDER will be added
