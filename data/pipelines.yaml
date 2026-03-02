@@ -1,0 +1,82 @@
+# Pipelines and tooling registry
+
+- id: atlite
+  name: atlite
+  kind: pipeline
+  short_description: >-
+    Converts weather data (ERA5, MERRA-2, etc.) into renewable energy
+    capacity factor time series for wind, solar and hydro.
+  repo_url: https://github.com/PyPSA/atlite
+  docs_url: https://atlite.readthedocs.io
+  license: BSD-2-Clause
+  maturity: production
+  runtime: python
+  inputs_from:
+    - weather_reanalysis_raster
+  outputs_to:
+    - renewable_potential_timeseries
+  collections:
+    - pypsa-earth-ecosystem
+
+- id: earth-osm
+  name: earth-osm
+  kind: pipeline
+  short_description: >-
+    Python library to extract power infrastructure (transmission lines,
+    substations, generators) from OpenStreetMap for any geography.
+  repo_url: https://github.com/pypsa-meets-earth/earth-osm
+  license: MIT
+  maturity: research
+  runtime: python
+  outputs_to:
+    - grid_topology_vector
+  collections:
+    - pypsa-earth-ecosystem
+
+- id: pydemand
+  name: pydemand
+  kind: pipeline
+  short_description: >-
+    Tool to generate country-level electricity demand time series
+    for energy system models.
+  repo_url: https://github.com/pypsa-meets-earth/pydemand
+  license: MIT
+  maturity: research
+  runtime: python
+  outputs_to:
+    - electricity_demand_timeseries
+  collections:
+    - pypsa-earth-ecosystem
+    - demand-tools
+
+- id: detect-energy
+  name: detect-energy
+  kind: pipeline
+  short_description: >-
+    Prototype ML pipeline for detecting power infrastructure from
+    satellite imagery using semi-supervised object detection.
+  repo_url: https://github.com/pypsa-meets-earth/detect-energy
+  license: MIT
+  maturity: experimental
+  runtime: python
+  inputs_from:
+    - eo_satellite_raster
+  outputs_to:
+    - grid_topology_vector
+  collections:
+    - pypsa-earth-ecosystem
+
+- id: gridfinder
+  name: gridfinder
+  kind: pipeline
+  short_description: >-
+    Infers likely medium and low voltage grid lines from settlement
+    data and nighttime lights for data-sparse regions.
+  repo_url: https://github.com/carderne/gridfinder
+  license: MIT
+  maturity: research
+  runtime: python
+  outputs_to:
+    - grid_topology_vector
+  collections:
+    - grid-datasets-global
