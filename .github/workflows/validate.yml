@@ -1,0 +1,122 @@
+name: Validate Registry Data
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/**/*.yaml'
+      - 'data/**/*.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'data/**/*.yaml'
+      - 'data/**/*.yml'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        pip install pyyaml jsonschema requests
+    
+    - name: Validate YAML syntax
+      run: |
+        python -c "
+import yaml
+import sys
+from pathlib import Path
+
+errors = []
+for yaml_file in Path('data').rglob('*.yaml'):
+    try:
+        with open(yaml_file) as f:
+            yaml.safe_load(f)
+        print(f'✅ {yaml_file}')
+    except Exception as e:
+        errors.append(f'{yaml_file}: {e}')
+        print(f'❌ {yaml_file}: {e}')
+
+if errors:
+    sys.exit(1)
+print(f'\\n✅ All YAML files valid')
+        "
+    
+    - name: Validate schema compliance
+      run: |
+        python -c "
+import yaml
+import sys
+from pathlib import Path
+
+REQUIRED_FIELDS = ['id', 'name', 'type', 'description', 'url']
+
+errors = []
+for yaml_file in Path('data').rglob('*.yaml'):
+    with open(yaml_file) as f:
+        data = yaml.safe_load(f)
+    
+    if not data:
+        continue
+    
+    for category, entries in data.items():
+        if not isinstance(entries, list):
+            continue
+        
+        for idx, entry in enumerate(entries):
+            missing = [f for f in REQUIRED_FIELDS if f not in entry]
+            if missing:
+                errors.append(f'{yaml_file}:{category}[{idx}] missing: {missing}')
+                print(f'❌ {yaml_file}:{category}[{idx}] missing: {missing}')
+
+if errors:
+    print(f'\\n❌ Found {len(errors)} validation errors')
+    sys.exit(1)
+print(f'\\n✅ Schema validation passed')
+        "
+    
+    - name: Check for duplicate IDs
+      run: |
+        python -c "
+import yaml
+import sys
+from pathlib import Path
+from collections import Counter
+
+all_ids = []
+for yaml_file in Path('data').rglob('*.yaml'):
+    with open(yaml_file) as f:
+        data = yaml.safe_load(f)
+    
+    if not data:
+        continue
+    
+    for category, entries in data.items():
+        if isinstance(entries, list):
+            all_ids.extend([e.get('id') for e in entries if e.get('id')])
+
+duplicates = {id: count for id, count in Counter(all_ids).items() if count > 1}
+
+if duplicates:
+    print(f'❌ Found duplicate IDs:')
+    for id, count in duplicates.items():
+        print(f'  - {id}: {count} occurrences')
+    sys.exit(1)
+print(f'✅ No duplicate IDs found ({len(all_ids)} unique entries)')
+        "
+    
+    - name: Summary
+      if: success()
+      run: |
+        echo "✅ All validation checks passed!"
+        echo "Registry data is ready for deployment."
