@@ -1,0 +1,110 @@
+name: 🔧 Add New Model
+description: Submit a climate or energy model to the registry
+title: "[MODEL] "
+labels: ["model", "new-entry"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing to the Climate & Energy Intelligence Hub!
+        Please provide details about the model you'd like to add.
+
+  - type: input
+    id: model_name
+    attributes:
+      label: Model Name
+      description: Official name of the model
+      placeholder: ex. PyPSA-Earth, GCAM, MESSAGE
+    validations:
+      required: true
+
+  - type: input
+    id: model_url
+    attributes:
+      label: Model URL
+      description: Official website or primary documentation page
+      placeholder: https://example.com/model
+    validations:
+      required: true
+
+  - type: input
+    id: repo_url
+    attributes:
+      label: Repository URL
+      description: GitHub/GitLab repository (if applicable)
+      placeholder: https://github.com/org/repo
+
+  - type: dropdown
+    id: model_type
+    attributes:
+      label: Model Type
+      description: Primary category of the model
+      options:
+        - Energy System Model
+        - Integrated Assessment Model (IAM)
+        - Climate Model
+        - Economic Model
+        - Power System Model
+        - Building Energy Model
+        - Transportation Model
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: domain
+    attributes:
+      label: Domain
+      description: Primary application domain
+      options:
+        - Energy System Modeling
+        - Climate Science
+        - Power Grid Analysis
+        - Renewable Energy
+        - Energy Economics
+        - Building Performance
+        - Transportation Planning
+        - Policy Analysis
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Brief description of the model (2-3 sentences)
+      placeholder: What does this model do? What problems does it solve?
+    validations:
+      required: true
+
+  - type: input
+    id: license
+    attributes:
+      label: License
+      description: Software license (e.g., MIT, GPL-3.0, Apache-2.0)
+      placeholder: MIT
+    validations:
+      required: true
+
+  - type: textarea
+    id: tags
+    attributes:
+      label: Tags
+      description: Relevant tags/keywords (comma-separated)
+      placeholder: pypsa, optimization, open-source, python
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: verification
+    attributes:
+      label: Verification
+      description: Please confirm the following
+      options:
+        - label: I have verified this is an active/maintained project
+          required: true
+        - label: The model is publicly accessible or documented
+          required: true
+        - label: I have checked this model isn't already in the registry
+          required: true
