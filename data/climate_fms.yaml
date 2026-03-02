@@ -1,0 +1,91 @@
+# Climate & Weather Foundation Models registry
+
+- id: climax
+  name: ClimaX
+  kind: climate_fm
+  short_description: >-
+    Foundation model for weather and climate science pre-trained on
+    CMIP6 simulations and fine-tuned on ERA5.
+  repo_url: https://github.com/microsoft/ClimaX
+  license: MIT
+  maturity: research
+  task: forecasting
+  architecture: transformer
+  input_data: [CMIP6, ERA5]
+  output_vars: [temperature, wind_speed, geopotential, precipitation]
+  spatial_resolution: 1.40625deg
+  temporal_resolution: 6h
+  lead_time: 10days
+  collections:
+    - climate-foundation-models
+
+- id: graphcast
+  name: GraphCast
+  kind: climate_fm
+  short_description: >-
+    DeepMind's graph neural network model for global weather forecasting
+    with state-of-the-art accuracy.
+  repo_url: https://github.com/google-deepmind/graphcast
+  license: Apache-2.0
+  maturity: research
+  task: forecasting
+  architecture: graph-neural-network
+  input_data: [ERA5]
+  output_vars: [temperature, wind, pressure, humidity]
+  spatial_resolution: 0.25deg
+  temporal_resolution: 6h
+  lead_time: 10days
+  collections:
+    - climate-foundation-models
+
+- id: pangu-weather
+  name: Pangu-Weather
+  kind: climate_fm
+  short_description: >-
+    3D Earth-specific transformer for accurate global weather forecasting.
+  repo_url: https://github.com/198808xc/Pangu-Weather
+  license: MIT
+  maturity: research
+  task: forecasting
+  architecture: transformer
+  input_data: [ERA5]
+  spatial_resolution: 0.25deg
+  lead_time: 7days
+  collections:
+    - climate-foundation-models
+
+- id: aurora
+  name: Aurora
+  kind: climate_fm
+  short_description: >-
+    Microsoft's versatile foundation model for atmospheric prediction
+    trained on multiple data sources.
+  repo_url: https://github.com/microsoft/aurora
+  license: MIT
+  maturity: research
+  task: forecasting
+  architecture: transformer
+  input_data: [ERA5, CMIP6, GFS]
+  spatial_resolution: 0.1deg
+  lead_time: 15days
+  collections:
+    - climate-foundation-models
+
+- id: fourcastnet
+  name: FourCastNet
+  kind: climate_fm
+  short_description: >-
+    NVIDIA's Fourier neural operator for fast global weather prediction.
+  repo_url: https://github.com/NVlabs/FourCastNet
+  license: BSD-3-Clause
+  maturity: research
+  task: forecasting
+  architecture: fourier-neural-operator
+  input_data: [ERA5]
+  spatial_resolution: 0.25deg
+  temporal_resolution: 6h
+  lead_time: 2weeks
+  collections:
+    - climate-foundation-models
+
+# Additional models populated by ETL script
