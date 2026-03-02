@@ -1,0 +1,125 @@
+# Energy system models registry
+# See docs/schema.md for field reference
+# Run etl/ingest_energy_tools.py to populate from energy-tools.csv
+
+- id: pypsa
+  name: PyPSA
+  kind: energy_model
+  short_description: >-
+    Open power system analysis framework for transmission and distribution
+    networks, capacity expansion and optimal power flow.
+  repo_url: https://github.com/pypsa/pypsa
+  docs_url: https://pypsa.readthedocs.io
+  license: MIT
+  maturity: production
+  domain: power_system
+  scale: national
+  model_type: capacity_expansion
+  language: python
+  solver_interface: [linopy, pyomo]
+  inputs:
+    - electricity_demand_timeseries
+    - renewable_potential_timeseries
+    - grid_topology_vector
+    - generator_fleet_tabular
+  outputs:
+    - generation_timeseries
+    - investment_decisions_tabular
+    - network_flows_timeseries
+  collections:
+    - power-system-tools
+
+- id: pypsa-earth
+  name: PyPSA-Earth
+  kind: energy_model
+  short_description: >-
+    Global energy system model built on PyPSA with OpenStreetMap grid data
+    and automated country/regional model generation.
+  repo_url: https://github.com/pypsa-meets-earth/pypsa-earth
+  docs_url: https://pypsa-earth.readthedocs.io
+  license: MIT
+  maturity: research
+  domain: power_system
+  scale: global
+  model_type: capacity_expansion
+  language: python
+  solver_interface: [linopy]
+  inputs:
+    - electricity_demand_timeseries
+    - renewable_potential_timeseries
+    - grid_topology_vector
+    - generator_fleet_tabular
+  outputs:
+    - generation_timeseries
+    - investment_decisions_tabular
+    - emissions_timeseries
+    - network_flows_timeseries
+  collections:
+    - pypsa-earth-ecosystem
+    - power-system-tools
+
+- id: pandapower
+  name: pandapower
+  kind: energy_model
+  short_description: >-
+    Power system analysis tool for power flow, optimal power flow,
+    short-circuit and state estimation in distribution and transmission grids.
+  repo_url: https://github.com/e2nIEE/pandapower
+  docs_url: https://pandapower.readthedocs.io
+  license: BSD-3-Clause
+  maturity: production
+  domain: power_system
+  scale: regional
+  model_type: power_flow
+  language: python
+  inputs:
+    - grid_topology_vector
+    - generator_fleet_tabular
+  outputs:
+    - network_flows_timeseries
+  collections:
+    - power-system-tools
+
+- id: grid2op
+  name: Grid2Op
+  kind: rl_environment
+  short_description: >-
+    Reinforcement learning environment for training agents to manage power
+    grids under constraints and uncertainty.
+  repo_url: https://github.com/grid2op/grid2op
+  docs_url: https://grid2op.readthedocs.io
+  license: MPL-2.0
+  maturity: research
+  domain: power_system
+  scale: national
+  model_type: rl_env
+  language: python
+  inputs:
+    - grid_topology_vector
+    - generation_timeseries
+    - electricity_demand_timeseries
+  outputs:
+    - adequacy_metrics_tabular
+  collections:
+    - rl-environments
+    - power-system-tools
+
+- id: calliope
+  name: Calliope
+  kind: energy_model
+  short_description: >-
+    Multi-scale energy system modeling framework with flexible technology
+    and temporal resolution.
+  repo_url: https://github.com/calliope-project/calliope
+  docs_url: https://calliope.readthedocs.io
+  license: Apache-2.0
+  maturity: research
+  domain: multi_sector
+  scale: national
+  model_type: capacity_expansion
+  language: python
+  solver_interface: [pyomo]
+  collections:
+    - power-system-tools
+
+# Additional entries will be populated by ETL script
