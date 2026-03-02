@@ -1,0 +1,83 @@
+# Datasets registry
+# See docs/schema.md for field reference
+
+- id: global-power-plant-database
+  name: Global Power Plant Database
+  kind: grid_dataset
+  short_description: >-
+    Comprehensive open database of power plants worldwide including capacity,
+    fuel type, location coordinates, and generation estimates.
+  data_url: https://datasets.wri.org/dataset/globalpowerplantdatabase
+  license: CC-BY-4.0
+  maturity: production
+  modality: tabular
+  region_tags: [global]
+  layer: generation
+  update_frequency: annual
+  format: [csv]
+  collections:
+    - grid-datasets-global
+
+- id: owid-energy-data
+  name: Our World in Data - Energy Dataset
+  kind: socioeconomic_dataset
+  short_description: >-
+    Complete energy dataset with electricity generation, consumption, emissions,
+    and energy mix for 200+ countries over time.
+  repo_url: https://github.com/owid/energy-data
+  data_url: https://github.com/owid/energy-data/raw/master/owid-energy-data.csv
+  license: CC-BY-4.0
+  maturity: production
+  modality: timeseries
+  region_tags: [global]
+  layer: demand
+  update_frequency: monthly
+  format: [csv]
+  collections:
+    - grid-datasets-global
+
+- id: globalenergygis
+  name: GlobalEnergyGIS
+  kind: resource_dataset
+  short_description: >-
+    Geospatial renewable energy potential data including wind, solar, and
+    hydro resources at global scale with infrastructure layers.
+  repo_url: https://github.com/niclasmattsson/GlobalEnergyGIS
+  license: MIT
+  maturity: research
+  modality: raster
+  region_tags: [global]
+  layer: resource
+  format: [geotiff, hdf5]
+  collections:
+    - grid-datasets-global
+
+- id: pypsa-kz-data
+  name: PyPSA Kazakhstan Data Bundle
+  kind: country_data_bundle
+  short_description: >-
+    Curated input data bundle for Kazakhstan energy system modeling
+    including demand, generation fleet, and grid topology.
+  repo_url: https://github.com/pypsa-meets-earth/pypsa-kz-data
+  license: MIT
+  maturity: research
+  modality: mixed
+  region_tags: [KAZ]
+  collections:
+    - pypsa-earth-ecosystem
+
+- id: pypsa-zm-data
+  name: PyPSA Zambia Data Bundle
+  kind: country_data_bundle
+  short_description: >-
+    Country-specific data bundle for Zambia energy modeling with validated
+    grid and generation data.
+  repo_url: https://github.com/pypsa-meets-earth/pypsa-zm-data
+  license: MIT
+  maturity: research
+  modality: mixed
+  region_tags: [ZMB]
+  collections:
+    - pypsa-earth-ecosystem
+
+# Additional entries populated by ETL scripts
